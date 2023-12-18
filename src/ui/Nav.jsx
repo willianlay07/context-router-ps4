@@ -1,6 +1,9 @@
 import { NavLink } from "react-router-dom";
+import { useAuth } from "../contexts/AuthProvider";
 
 const Nav = () => {
+  const { isAuth } = useAuth();
+
   return (
     <div>
       <ul
@@ -15,9 +18,15 @@ const Nav = () => {
         <li style={{ paddingLeft: "20px", paddingRight: "20px" }}>
           <NavLink to="/posts">Posts</NavLink>
         </li>
-        <li style={{ paddingLeft: "20px", paddingRight: "20px" }}>
-          <NavLink to="/log-in">Log In</NavLink>
-        </li>
+        {isAuth ? (
+          <li style={{ paddingLeft: "20px", paddingRight: "20px" }}>
+            <NavLink to="/auth/profile">Profile</NavLink>
+          </li>
+        ) : (
+          <li style={{ paddingLeft: "20px", paddingRight: "20px" }}>
+            <NavLink to="/log-in">Log In</NavLink>
+          </li>
+        )}
       </ul>
     </div>
   );
